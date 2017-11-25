@@ -10,6 +10,9 @@ public class CharController : MonoBehaviour {
     public float jumpSpeed;
 
     public GameObject shot;
+
+    private float timer;
+    public float shotCooldown;
 	
 	// Update is called once per frame
 	void FixedUpdate ()
@@ -38,13 +41,19 @@ public class CharController : MonoBehaviour {
 
     private void Update()
     {
+        timer += Time.deltaTime;
+
+        
         if(Input.GetButtonDown("Fire1"))
         {
             if(ReadyToFire())
             {
                 GameObject i = Instantiate(shot) as GameObject;
                 i.transform.parent = this.transform;
+                i.transform.position = this.transform.position;
                 i.GetComponent<Projectile>().Fire();
+
+                timer = 0;
             }
 
         }
@@ -52,7 +61,12 @@ public class CharController : MonoBehaviour {
 
     private bool ReadyToFire()
     {
-        return true;
+        if (timer > shotCooldown)
+        {
+            return true;
+        }
+
+        return false;
     }
 
 }
