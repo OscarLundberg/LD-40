@@ -9,6 +9,7 @@ public class CharController : MonoBehaviour {
     public float moveSpeed;
     public float jumpSpeed;
 
+    public GameObject shot;
 	
 	// Update is called once per frame
 	void FixedUpdate ()
@@ -39,8 +40,19 @@ public class CharController : MonoBehaviour {
     {
         if(Input.GetButtonDown("Fire1"))
         {
-            this.GetComponent<Projectile>().Fire();
+            if(ReadyToFire())
+            {
+                GameObject i = Instantiate(shot) as GameObject;
+                i.transform.parent = this.transform;
+                i.GetComponent<Projectile>().Fire();
+            }
+
         }
+    }
+
+    private bool ReadyToFire()
+    {
+        return true;
     }
 
 }
