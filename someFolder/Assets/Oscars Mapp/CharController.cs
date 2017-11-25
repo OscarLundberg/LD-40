@@ -5,6 +5,8 @@ using UnityEngine;
 public class CharController : MonoBehaviour {
 
     public Rigidbody2D rb;
+    public int hp;
+
 
     public float moveSpeed;
     public float jumpSpeed;
@@ -68,5 +70,17 @@ public class CharController : MonoBehaviour {
 
         return false;
     }
+
+
+    public void Hit()
+    {
+        this.hp--;
+
+        if(hp <= 0)
+        {
+            //GameOver
+        }
+    }
+
 
 }
