@@ -27,12 +27,20 @@ public class CharController : MonoBehaviour {
         if(Input.GetAxis("Vertical") > 0)
         {
             //Jump
-
-            rb.AddForce(new Vector2(rb.velocity.x, jumpSpeed * Time.deltaTime));
+            if(rb.velocity.y == 0)
+           { 
+                rb.AddForce(new Vector2(rb.velocity.x, jumpSpeed * Time.deltaTime));
+           }
         }
-
-
     }
 
+
+    private void Update()
+    {
+        if(Input.GetButtonDown("Fire1"))
+        {
+            this.GetComponent<Projectile>().Fire();
+        }
+    }
 
 }
